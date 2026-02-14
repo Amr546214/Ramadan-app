@@ -3,33 +3,28 @@ import Swal from "sweetalert2";
 import azkarData from "../data/Azkar.json";
 import Header from "./Header";
 
-export default function PrayerApp({
-  prayerData,
-  clock,
-  nextPrayerText,
-}) {
-  const [highlight, setHighlight] = useState("");
+const arabicNames = {
+  Fajr: "الفجر",
+  Sunrise: "الشروق",
+  Dhuhr: "الظهر",
+  Asr: "العصر",
+  Maghrib: "المغرب",
+  Isha: "العشاء",
+};
 
+const mainPrayersOrder = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+export default function PrayerApp({ prayerData, clock, nextPrayerText }) {
+  const [highlight, setHighlight] = useState("");
   const [azkar, setAzkar] = useState([]);
   const [index, setIndex] = useState(0);
   const [counter, setCounter] = useState(0);
 
-  const arabicNames = {
-    Fajr: "الفجر",
-    Sunrise: "الشروق",
-    Dhuhr: "الظهر",
-    Asr: "العصر",
-    Maghrib: "المغرب",
-    Isha: "العشاء",
-  };
-
-  const mainPrayersOrder = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
-useEffect(() => {
-  if ("Notification" in window) {
-    Notification.requestPermission();
-  }
-}, []);
+  useEffect(() => {
+    if ("Notification" in window) {
+      Notification.requestPermission();
+    }
+  }, []);
 
   useEffect(() => {
     if (!prayerData || !nextPrayerText) return;
@@ -47,7 +42,7 @@ useEffect(() => {
   }, []);
 
   const handleCounter = () => {
-    if (counter > 0) setCounter(counter - 1);
+    setCounter((c) => (c > 0 ? c - 1 : 0));
   };
 
   const handleNextZekr = async () => {
@@ -62,7 +57,7 @@ useEffect(() => {
     }
 
     if (index + 1 < azkar.length) {
-      setIndex(index + 1);
+      setIndex((i) => i + 1);
       setCounter(azkar[index + 1].val);
     } else {
       Swal.fire("خلصت الأذكار ✔");
@@ -104,7 +99,7 @@ useEffect(() => {
 
           <div className="card">
             <div className="card-title">
-              <h4>اذكار </h4>
+              <h4>اذكار</h4>
             </div>
 
             <div className="azkar-body">

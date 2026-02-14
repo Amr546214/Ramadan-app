@@ -1,8 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import '../Quiz.css'
-
-import Header from './Header'
 import Main from './Main';
 import Loader from './Loader';
 import Error from './Error';
