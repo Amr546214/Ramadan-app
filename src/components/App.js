@@ -22,12 +22,13 @@ const intialstate={
 
 function reducer(state,action){
   switch(action.type){
-    case 'dataRecieved':
-      return{
-        ...state,
-        questions: action.payload,
-        status:'ready'
-      };
+    case "dataRecieved":
+  return {
+    ...state,
+    questions: Array.isArray(action.payload) ? action.payload : [],
+    status: "ready",
+  };
+
       case 'datafailed':
         return{
           ...state,
@@ -171,11 +172,23 @@ useEffect(() => {
 
 
 
-  useEffect(function(){
-    fetch("http://localhost:9000/questions").then(res => res.json())
-      .then(data => dispatch({type: 'dataRecieved',payload:data})).catch(err => dispatch({type:'datafailed'}));
+useEffect(() => {
+  fetch(process.env.PUBLIC_URL + "/data/questions.json")
+    .then((res) => {
+      if (!res.ok) throw new Error("questions.json not found");
+      return res.json();
+    })
+    .then((data) => {
+      const list = Array.isArray(data) ? data : data.questions; // ✅ هنا الحل
+      dispatch({ type: "dataRecieved", payload: list });
+    })
+    .catch((err) => {
+      console.error(err);
+      dispatch({ type: "datafailed" });
+    });
+}, []);
 
-  },[])
+
   return (
     <div className="App"> 
    <BrowserRouter>

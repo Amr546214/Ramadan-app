@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import azkarData from "../data/Azkar.json";
 import Header from "./Header";
 
 const arabicNames = {
@@ -36,9 +35,20 @@ export default function PrayerApp({ prayerData, clock, nextPrayerText }) {
     if (match) setHighlight(match);
   }, [nextPrayerText, prayerData]);
 
+  // ✅ تحميل الأذكار من public/data/Azkar.json
   useEffect(() => {
-    setAzkar(azkarData.sabah);
-    setCounter(azkarData.sabah[0].val);
+    fetch(process.env.PUBLIC_URL + "/data/Azkar.json")
+      .then((res) => {
+        if (!res.ok) throw new Error("Azkar.json not found");
+        return res.json();
+      })
+      .then((data) => {
+        const sabah = data?.sabah ?? [];
+        setAzkar(sabah);
+        setIndex(0);
+        setCounter(sabah[0]?.val ?? 0);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   const handleCounter = () => {
@@ -57,12 +67,13 @@ export default function PrayerApp({ prayerData, clock, nextPrayerText }) {
     }
 
     if (index + 1 < azkar.length) {
-      setIndex((i) => i + 1);
-      setCounter(azkar[index + 1].val);
+      const nextIndex = index + 1;
+      setIndex(nextIndex);
+      setCounter(azkar[nextIndex]?.val ?? 0);
     } else {
       Swal.fire("خلصت الأذكار ✔");
       setIndex(0);
-      setCounter(azkar[0].val);
+      setCounter(azkar[0]?.val ?? 0);
     }
   };
 
@@ -72,11 +83,7 @@ export default function PrayerApp({ prayerData, clock, nextPrayerText }) {
   return (
     <div className="prayer-page">
       <div className="prayer-wrap">
-        <Header
-          clock={clock}
-          prayerData={prayerData}
-          nextPrayerText={nextPrayerText}
-        />
+        <Header clock={clock} prayerData={prayerData} nextPrayerText={nextPrayerText} />
 
         <div className="grid">
           <div className="card">
