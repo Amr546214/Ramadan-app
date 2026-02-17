@@ -1,8 +1,8 @@
-# 🌙 Ramadan React App
+🌙 Ramadan React App
 
 A modern React application combining Islamic features with interactive UI.
 
-## ✨ Features
+ Features
 - Ramadan Quiz System
 - Prayer Times API integration
 - Next Prayer Detection Algorithm
@@ -11,20 +11,19 @@ A modern React application combining Islamic features with interactive UI.
 - Browser Notifications
 - Adhan Sound
 
-## 🛠 Tech Stack
+ Tech Stack
 - React
 - JavaScript
 - CSS
 - REST API
 - SweetAlert2
 
-## 🚀 Live Demo
-(Add your Netlify/Vercel link here)
-
-## 📂 GitHub Repo
+ Live Demo
+https://ramadan-ap.netlify.app/
+📂 GitHub Repo
 https://github.com/Amr546214/Ramadan-app
 
-## ▶️ Run Locally
+▶️ Run Locally
 
 ```bash
 npm install
