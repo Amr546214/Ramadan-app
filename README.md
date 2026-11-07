@@ -1,70 +1,22 @@
-🌙 Ramadan React App
+# Ramadan App
 
-   A modern React application that combines Islamic features with an interactive user interface, built to practice real-world front-end concepts such as API integration, state management, and responsive design.
+An Arabic React app with Cairo prayer times, a next-prayer indicator, an interactive Ramadan quiz, and an azkar reader with a repetition counter.
 
-✨ Features
+[Open the live demo](https://ramadan-ap.netlify.app/)
 
-🧠 Ramadan Quiz System
+![Arabic Ramadan App showing the prayer-times interface](docs/images/preview.webp)
 
-🕌 Prayer Times API Integration
+## Run locally
 
-⏰ Next Prayer Detection Logic
+```bash
+npm ci
+npm start
+```
 
-🕒 Real-time Clock
+Create React App serves the application at `http://localhost:3000`. Use `npm run build` to create a static production bundle.
 
-📿 Morning Azkar with Counter
+- Prayer times are retrieved from the AlAdhan API for Cairo. This view needs an internet connection.
+- Quiz questions and azkar are bundled as JSON in [`public/data/`](public/data/).
+- Prayer-time notifications depend on browser support and user permission.
 
-🔔 Browser Notifications
-
-🎵 Adhan Sound Alerts
-
-🛠 Tech Stack
-
-React
-
-JavaScript (ES6+)
-
-CSS
-
-REST API
-
-SweetAlert2
-
-🚀 Live Demo
-
-👉 https://ramadan-ap.netlify.app/
-
-📂 GitHub Repository
-
-👉 https://github.com/Amr546214/Ramadan-app
-
-📌 What I Practiced in This Project
-
-Component-based architecture in React
-
-Fetching and handling external APIs
-
-State management with hooks
-
-Conditional rendering
-
-Responsive UI design
-
-User interaction and notifications
-
-Clean UI structuring
-
-▶️ Run Locally
-npm install
-npm run dev
-📸 Screenshots
-
-<img width="1003" height="607" alt="image" src="https://github.com/user-attachments/assets/b1a68ab2-6c79-4181-8d79-32ae6a306350" />
-
-
-👨‍💻 Author
-
-Amr Okasha
-Junior Front-End / React Developer
-
-✨ Built as part of my journey to become a professional Front-End React Developer.
+**Stack:** React, React Router, JavaScript, CSS, and SweetAlert2. The main routes and data loading are in [`src/components/App.js`](src/components/App.js).
